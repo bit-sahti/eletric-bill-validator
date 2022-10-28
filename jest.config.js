@@ -1,0 +1,17 @@
+const config = {
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100
+    }
+  },
+  testMatch: ['**/__tests__/**'],
+  coverageDirectory: './coverage',
+  reporters: ['default'],
+  testEnvironment: 'node',
+  clearMocks: true
+}
+
+module.exports = config
