@@ -1,8 +1,8 @@
 const { Router } = require('express')
-const { elegibilityController } = require('../controller')
+const { eligibilityController } = require('../controller')
 
 const elegibitilyRouter = Router()
 
-elegibitilyRouter.post('/elegibility', elegibilityController)
+elegibitilyRouter.post('/eligibility', eligibilityController)
 
 module.exports = elegibitilyRouter

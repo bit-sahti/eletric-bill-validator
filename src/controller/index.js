@@ -1,9 +1,9 @@
-const { elegibilityService } = require('../service')
+const { eligibilityService } = require('../service')
 
-const elegibilityController = (request, response) => {
-  const result = elegibilityService(request.body)
+const eligibilityController = (request, response) => {
+  const result = eligibilityService(request.body)
 
   response.json(result)
 }
 
-module.exports = { elegibilityController }
+module.exports = { eligibilityController }

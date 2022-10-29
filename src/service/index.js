@@ -1,4 +1,4 @@
-const elegibilityService = ({
+const eligibilityService = ({
     numeroDoDocumento,
     tipoDeConexao,
     classeDeConsumo,
@@ -8,4 +8,4 @@ const elegibilityService = ({
     return 'ok'
 }
 
-module.exports = { elegibilityService }
+module.exports = { eligibilityService }

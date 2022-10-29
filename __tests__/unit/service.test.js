@@ -1,6 +1,6 @@
-const { elegibilityService } = require('../../src/service')
+const { eligibilityService } = require('../../src/service')
 
-describe('Elegibility Service test suite', () => {
+describe('Eligibility Service test suite', () => {
     it.todo('should identify eligible bills')
     it.todo('should identify ineligible consumption classes')
     it.todo('should identify ineligible biling modalities')

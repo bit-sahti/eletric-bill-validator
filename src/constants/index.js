@@ -1,4 +1,4 @@
-const elegibilityConstants = {
+const eligibilityConstants = {
   errors: {
     invalidConsumpionClass: 'Classe de consumo não aceita',
     invalidBillingModality: 'Modalidade tarifária não aceita',
@@ -20,4 +20,4 @@ const elegibilityConstants = {
   }
 }
 
-module.exports = { elegibilityConstants }
+module.exports = { eligibilityConstants }
