@@ -42,6 +42,33 @@ class EletricBillBuilder {
     this.#data.averageConsumption = threshold + 1
   }
 
+  withInvalidConsumptionClass() {
+    const { ineligible: ineligibleClasses } = eligibilityConstants.consumptionClasses
+    const randomIndex = getRandomNumberFromRange(ineligibleClasses.length)
+
+    this.#data.consumptionClass = ineligibleClasses[randomIndex]
+
+    return this
+  }
+
+  withInvalidBillingModality() {
+    const { ineligible: ineligibleModalities } = eligibilityConstants.billingModalities
+    const randomIndex = getRandomNumberFromRange(ineligibleModalities.length)
+
+    this.#data.billingModality = ineligibleModalities[randomIndex]
+
+    return this
+  }
+
+  withInvalidAverageConsumption() {
+    const connectionType = this.#data.connectionType
+    const threshold = eligibilityConstants.consumptionThresholdsInKWh[connectionType]
+    
+    this.#data.averageConsumption = threshold
+
+    return this
+  }
+
   build() {
     return this.#data
   }
