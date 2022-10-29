@@ -2,6 +2,10 @@ const calculateAverage = array => {}
 
 const calculateCO2Economy = averageConsumption => {}
 
-const getRandomNumberFromRange = (range) => Math.floor(Math.random() * range)
+const getRandomValuefromArray = (array) => {
+    const randomIndex = Math.floor(Math.random() * array.length)
 
-module.exports = { calculateAverage, calculateCO2Economy, getRandomNumberFromRange }
+    return array[randomIndex]
+}
+
+module.exports = { calculateAverage, calculateCO2Economy, getRandomValuefromArray }

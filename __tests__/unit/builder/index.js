@@ -1,5 +1,5 @@
 const { eligibilityConstants } = require('../../../src/constants')
-const { getRandomNumberFromRange } = require('../../../src/helpers')
+const { getRandomValuefromArray } = require('../../../src/helpers')
 
 class EletricBillBuilder {
   #data
@@ -11,60 +11,57 @@ class EletricBillBuilder {
     this.#getBillingModalities()
     this.#getConnectionType()
     this.#getAverageConsumption()
-
   }
 
   #getConsumptionClass() {
-    const { eligible: eligibleClasses } = eligibilityConstants.consumptionClasses
-    const randomIndex = getRandomNumberFromRange(eligibleClasses.length)
+    const { eligible: eligibleClasses } =
+      eligibilityConstants.consumptionClasses
 
-    this.#data.consumptionClass = eligibleClasses[randomIndex]
+    this.#data.consumptionClass = getRandomValuefromArray(eligibleClasses)
   }
 
   #getBillingModalities() {
-    const { eligible: eligibleModalities } = eligibilityConstants.billingModalities
-    const randomIndex = getRandomNumberFromRange(eligibleModalities.length)
+    const { eligible: eligibleModalities } =
+      eligibilityConstants.billingModalities
 
-    this.#data.billingModality = eligibleModalities[randomIndex]
+    this.#data.billingModality = getRandomValuefromArray(eligibleModalities)
   }
 
   #getConnectionType() {
     const { connectionTypes } = eligibilityConstants
-    const randomIndex = getRandomNumberFromRange(connectionTypes.length)
 
-    this.#data.connectionType = connectionTypes[randomIndex]
+    this.#data.connectionType = getRandomValuefromArray(connectionTypes)
+  }
+
+  #getConsumptionThreshould() {
+    const connectionType = this.#data.connectionType
+    return eligibilityConstants.consumptionThresholdsInKWh[connectionType]
   }
 
   #getAverageConsumption() {
-    const connectionType = this.#data.connectionType
-    const threshold = eligibilityConstants.consumptionThresholdsInKWh[connectionType]
-    
-    this.#data.averageConsumption = threshold + 1
+    this.#data.averageConsumption = this.#getConsumptionThreshould() + 1
   }
 
   withInvalidConsumptionClass() {
-    const { ineligible: ineligibleClasses } = eligibilityConstants.consumptionClasses
-    const randomIndex = getRandomNumberFromRange(ineligibleClasses.length)
+    const { ineligible: ineligibleClasses } =
+      eligibilityConstants.consumptionClasses
 
-    this.#data.consumptionClass = ineligibleClasses[randomIndex]
+    this.#data.consumptionClass = getRandomValuefromArray(ineligibleClasses)
 
     return this
   }
 
   withInvalidBillingModality() {
-    const { ineligible: ineligibleModalities } = eligibilityConstants.billingModalities
-    const randomIndex = getRandomNumberFromRange(ineligibleModalities.length)
+    const { ineligible: ineligibleModalities } =
+      eligibilityConstants.billingModalities
 
-    this.#data.billingModality = ineligibleModalities[randomIndex]
+    this.#data.billingModality = getRandomValuefromArray(ineligibleModalities)
 
     return this
   }
 
   withInvalidAverageConsumption() {
-    const connectionType = this.#data.connectionType
-    const threshold = eligibilityConstants.consumptionThresholdsInKWh[connectionType]
-    
-    this.#data.averageConsumption = threshold
+    this.#data.averageConsumption = this.#getConsumptionThreshould() - 1
 
     return this
   }
