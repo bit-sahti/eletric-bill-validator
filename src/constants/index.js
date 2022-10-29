@@ -4,12 +4,19 @@ const elegibilityConstants = {
     invalidBillingModality: 'Modalidade tarifária não aceita',
     minimalConsumptionNotMet: 'Consumo muito baixo para tipo de conexão'
   },
-  consumptionClasses: ['Comercial', 'Residencial', 'Industrial'],
-  billingModalities: ['Convencional', 'Branca'],
+  consumptionClasses: {
+    eligible: ['Comercial', 'Residencial', 'Industrial'],
+    ineligible: ['Poder Público', 'Rural']
+  },
+  billingModalities: {
+    eligible: ['Convencional', 'Branca'],
+    ineligible: ['Azul', 'Verde']
+  },
+  connectionTypes: ['monofasico', 'bifasico', 'trifasico'],
   consumptionThresholdsInKWh: {
-    singlePhaseConextion: 400,
-    doublePhaseConextion: 500,
-    threePhaseConextion: 750
+    monofasico: 400,
+    bifasico: 500,
+    trifasico: 750
   }
 }
 
