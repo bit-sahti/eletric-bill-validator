@@ -1,3 +1,7 @@
+const generalConstants = {
+  carbonPer1000Kwh: 84
+}
+
 const eligibilityConstants = {
   errors: {
     invalidConsumpionClass: 'Classe de consumo não aceita',
@@ -20,4 +24,4 @@ const eligibilityConstants = {
   }
 }
 
-module.exports = { eligibilityConstants }
+module.exports = { generalConstants, eligibilityConstants }
