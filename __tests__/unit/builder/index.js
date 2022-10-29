@@ -66,6 +66,12 @@ class EletricBillBuilder {
     return this
   }
 
+  withConnectionType(connectionType) {
+    this.#data.connectionType = connectionType
+
+    return this
+  }
+
   build() {
     return this.#data
   }

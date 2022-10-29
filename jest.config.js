@@ -7,7 +7,7 @@ const config = {
       statements: 100
     }
   },
-  testMatch: ['**/__tests__/**'],
+  testMatch: ['**/__tests__/**/**test**'],
   coverageDirectory: './coverage',
   reporters: ['default'],
   testEnvironment: 'node',
