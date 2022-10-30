@@ -1,4 +1,16 @@
-const isStringValid = ({ string, valuesEnum }) => {}
+const isStringValid = ({ string, valuesEnum = [], pattern }) => {
+  if (typeof string !== 'string') return false
+
+  const isPatternMet = pattern && new RegExp(pattern).test(string)
+
+  if (pattern && !isPatternMet) return false
+
+  const isStringInEnum = valuesEnum.length && valuesEnum.some(value => string === value)
+
+  if (valuesEnum && !isStringInEnum) return false
+
+  return true
+}
 
 const isIntegerValid = ({ integer, minimal, maximal }) => {}
 

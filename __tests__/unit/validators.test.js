@@ -3,8 +3,21 @@ const { isStringValid, isArrayValid, isObjectValid } = require("../../src/valida
 
 describe('Validators test suite', () => {
     describe('isStringValid test suite', () => {
-        it.todo('should return false if value is not a string')
-        it.todo('should return false if value does not meet pattern')
+        it('should return true if value meets requirements', ()  => {
+            expect(isStringValid({ string: 'abc', pattern: '\\w', valuesEnum: ['adc', 'abc'] })).toBe(true)
+        })
+
+        it('should return false if value is not a string', ()  => {
+            expect(isStringValid({ string: 1 })).toBe(false)
+        })
+
+        it('should return false if value does not meet pattern', () => {
+            expect(isStringValid({ string: 'abc', pattern: '\\d' })).toBe(false)
+        })
+
+        it('should return false if value does is not one of the provided enum', () => {
+            expect(isStringValid({ string: 'abc', valuesEnum: ['a', 'b'] })).toBe(false)
+        })
     })
 
     describe('isStringInteger test suite', () => {
