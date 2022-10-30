@@ -5,30 +5,45 @@ const isStringValid = ({ string, valuesEnum = [], pattern }) => {
 
   if (pattern && !isPatternMet) return false
 
-  const isStringInEnum = valuesEnum.length && valuesEnum.some(value => string === value)
+  const shouldMatchEnum = !!valuesEnum.length
+  const isStringInEnum = shouldMatchEnum && valuesEnum.some(value => string === value)
 
-  if (valuesEnum && !isStringInEnum) return false
+  if (shouldMatchEnum && !isStringInEnum) return false
 
   return true
 }
 
+const isValidNumber = value => !Number.isNaN(Number(value))
+
 const isIntegerValid = ({ integer, minimal, maximal }) => {
-    const convertedInteger = Number(integer)
-    const convertedMinimal = Number(integer)
-    const convertedMaximal = Number(maximal)
+    if (!isValidNumber(integer)) return false
 
-    const isValidNumber = number => !Number.isNaN(number)
+    if (isValidNumber(minimal) && integer < minimal) return false
     
-    if (!isValidNumber(convertedInteger)) return false
+    if (isValidNumber(maximal) && integer > maximal) return false
     
-    if (isValidNumber(convertedMinimal) && convertedInteger < minimal) return false
-    
-    if (isValidNumber(convertedMaximal) && convertedInteger > convertedMaximal) return false
-
     return true
 }
 
-const isArrayValid = ({ array, minItems, maxItems, items }) => {}
+const isArrayValid = ({ array, minItems, maxItems, itemsSchema }) => {
+  const validators = {
+    string: isStringValid,
+    integer: isIntegerValid
+  }
+
+  if (!Array.isArray(array)) return false
+
+  if (isValidNumber(minItems) && array.length < minItems) return false
+
+  if (isValidNumber(maxItems) && array.length > maxItems) return false
+
+  const validateItem =  validators[itemsSchema?.type]
+  const isThereAnInvalidItem = array => array.some(value => !validateItem({ [itemsSchema.type]: value, ...itemsSchema }))
+
+  if (itemsSchema && validateItem && isThereAnInvalidItem(array)) return false
+
+  return true
+}
 
 const isObjectValid = ({ additionalProperties, required, properties }) => {}
 

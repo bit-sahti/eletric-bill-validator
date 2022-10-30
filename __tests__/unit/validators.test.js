@@ -47,10 +47,36 @@ describe('Validators test suite', () => {
     })
 
     describe('isArrayValid test suite', () => {
-        it.todo('should return false if value is not an array')
-        it.todo('should return false if array has fewer items than minimal')
-        it.todo('should return false if array has more items than maximal')
-        it.todo("should return false if one or more items don't meet requirements")
+        it('should return true if all criteria are met', () => {
+            expect(isArrayValid({ array: [1, 3], minItems: 2, maxItems: 10 })).toBe(true)
+        })
+
+        it('should return false if value is not an array', () => {
+            expect(isArrayValid({ array: {} })).toBe(false)
+        })
+
+        it('should return false if array has fewer items than minimal', () => {
+            expect(isArrayValid({ array: [1], minItems: 2 })).toBe(false)
+        })
+
+        it('should return false if array has more items than maximal', () => {
+            expect(isArrayValid({ array: [1, 3], maxItems: 1 })).toBe(false)
+        })
+
+        it("should return false if one or more items is a string and don't meet requirements", () => {
+            expect(isArrayValid({ array: ['as', '12', 'dc'], itemsSchema: {
+                type: 'string',
+                pattern: '\\D'
+            }})).toBe(false)
+        })
+
+        it("should return false if one or more items is a integer and don't meet requirements", () => {
+            expect(isArrayValid({ array: ['10', '3'], itemsSchema: {
+                type: 'integer',
+                minimal: '4',
+                maximal: '10'
+            }})).toBe(false)
+        })
     })
 
     describe('isObjectValid test suite', () => {
