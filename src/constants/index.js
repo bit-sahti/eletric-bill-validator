@@ -9,12 +9,12 @@ const eligibilityConstants = {
     minimalConsumptionNotMet: 'Consumo muito baixo para tipo de conexão'
   },
   consumptionClasses: {
-    eligible: ['Comercial', 'Residencial', 'Industrial'],
-    ineligible: ['Poder Público', 'Rural']
+    eligible: ['comercial', 'residencial', 'industrial'],
+    ineligible: ['poderPublico', 'rural']
   },
   billingModalities: {
-    eligible: ['Convencional', 'Branca'],
-    ineligible: ['Azul', 'Verde']
+    eligible: ['convencional', 'branca'],
+    ineligible: ['azul', 'verde']
   },
   connectionTypes: ['monofasico', 'bifasico', 'trifasico'],
   consumptionThresholdsInKWh: {
