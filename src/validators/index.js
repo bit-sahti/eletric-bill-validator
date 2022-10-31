@@ -45,6 +45,4 @@ const isArrayValid = ({ array, minItems, maxItems, itemsSchema }) => {
   return true
 }
 
-const isObjectValid = ({ additionalProperties, required, properties }) => {}
-
-module.exports = { isStringValid, isIntegerValid, isArrayValid, isObjectValid }
+module.exports = { isStringValid, isIntegerValid, isArrayValid }

@@ -1,5 +1,5 @@
 const { describe, it, expect } = require("@jest/globals")
-const { isStringValid, isIntegerValid, isArrayValid, isObjectValid } = require("../../src/validators")
+const { isStringValid, isIntegerValid, isArrayValid } = require("../../src/validators")
 
 describe('Validators test suite', () => {
     describe('isStringValid test suite', () => {
@@ -77,12 +77,5 @@ describe('Validators test suite', () => {
                 maximal: '10'
             }})).toBe(false)
         })
-    })
-
-    describe('isObjectValid test suite', () => {
-        it.todo('should return false if value is not an object')
-        it.todo('should return false if value has unlisted properties and additionalProperties is false')
-        it.todo("should return false if value doesn't have the required properties")
-        it.todo("should return false if one or more properties don't meet requirements")
     })
 })
