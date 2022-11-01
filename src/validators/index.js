@@ -28,7 +28,8 @@ const isIntegerValid = ({ integer, minimal, maximal }) => {
 const isArrayValid = ({ array, minItems, maxItems, itemsSchema }) => {
   const validators = {
     string: isStringValid,
-    integer: isIntegerValid
+    integer: isIntegerValid,
+    array: isArrayValid
   }
 
   if (!Array.isArray(array)) return false
