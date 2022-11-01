@@ -11,7 +11,7 @@ const mockExpress = () => {
     response.status = jest.fn().mockReturnValue(response)
     response.json = jest.fn().mockReturnValue(response)
 
-    return { request, response }
+    return { request, response, next: jest.fn() }
 }
 
 module.exports = { mockExpress }
