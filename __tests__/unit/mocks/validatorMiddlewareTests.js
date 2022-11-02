@@ -12,15 +12,16 @@ const invalidBody = {
 
 const mockedSchema = {
   aString: {
+    required: true,
     oneOf: [
       {
         type: 'string',
-        pattern: '\\W',
+        pattern: '\\D',
         example: '12132'
       },
       {
         type: 'string',
-        pattern: '\\D',
+        pattern: '[^a-zA-Z]',
         example: 'aasa'
       }
     ]
@@ -42,17 +43,17 @@ const expectedErrors = [
   {
     field: 'aString',
     value: invalidBody.aString,
-    validations: mockedSchema.aString
+    requirements: mockedSchema.aString
   },
   {
     field: 'anInteger',
     value: invalidBody.anInteger,
-    validations: mockedSchema.anInteger
+    requirements: mockedSchema.anInteger
   },
   {
     field: 'anArray',
     value: invalidBody.anArray,
-    validations: mockedSchema.anArray
+    requirements: mockedSchema.anArray
   }
 ]
 

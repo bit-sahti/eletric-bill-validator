@@ -1,8 +1,7 @@
 const { describe, it, expect } = require('@jest/globals')
 const { validatorMiddleware } = require('../../src/middlewares')
-const { ValidationError } = require('../../src/errors')
 const { mockExpress } = require('./utils')
-const { validBody, invalidBody, mockedSchema, expectedErrors } = require('./mocks/invalidParametersExample')
+const { validBody, invalidBody, mockedSchema, expectedErrors } = require('./mocks/validatorMiddlewareTests')
 
 describe('Middlewares test suite', () => {
   let request, response, next
@@ -38,13 +37,15 @@ describe('Middlewares test suite', () => {
     }
 
     expect(next).not.toHaveBeenCalled()
-    expect(validatorMiddleware(schema)(request, response, next)).toThrow()
+    expect(() => validatorMiddleware(schema)(request, response, next)).toThrowError('Erro de validação')
   })
 
   it("should throw if a property doesn't meet the provided schema", () => {
     const schema = {
       numeroDeDocumento: {
-        required: true
+        type: 'string',
+        required: true,
+        pattern: '\\W'
       }
     }
 
@@ -53,12 +54,19 @@ describe('Middlewares test suite', () => {
     }
 
     expect(next).not.toHaveBeenCalled()
-    expect(validatorMiddleware(schema)(request, response, next)).toThrow()
+    expect(() => validatorMiddleware(schema)(request, response, next)).toThrowError('Erro de validação')
   })
 
   it('should throw a validation error listing the failed validations', () => {
     request.body = invalidBody
 
-    expect(validatorMiddleware(mockedSchema)(request, response, next)).toThrowError(new ValidationError(expectedErrors))
+    try {
+      validatorMiddleware(mockedSchema)(request, response, next)
+
+      expect(next).not.toHaveBeenCalled()
+    } catch (error) {
+      // console.error(error)
+      expect(error.validations).toStrictEqual(expectedErrors)
+    }
   })
 })
