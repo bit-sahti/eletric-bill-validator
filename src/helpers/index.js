@@ -21,6 +21,7 @@ const getRandomValuefromArray = array => {
 const mergeNestedArrays = category =>
   Object.values(category).flatMap(array => array)
 
+// copied and modified from example code
 const enumOf = values => ({
   type: typeof values[0],
   valuesEnum: values,
