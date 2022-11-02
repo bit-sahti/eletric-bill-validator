@@ -1,8 +1,8 @@
 const { describe, it, expect } = require('@jest/globals')
 const {
-  isStringValid,
-  isIntegerValid,
-  isArrayValid
+  string: isStringValid,
+  integer: isIntegerValid,
+  array: isArrayValid
 } = require('../../src/validators')
 
 describe('Validators test suite', () => {

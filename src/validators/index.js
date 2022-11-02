@@ -1,4 +1,10 @@
-const isStringValid = ({ string, valuesEnum = [], pattern }) => {
+const validators = {
+  string: isStringValid,
+  integer: isIntegerValid,
+  array: isArrayValid
+}
+
+function isStringValid({ string, valuesEnum = [], pattern }) {
   if (typeof string !== 'string') return false
 
   const isPatternMet = pattern && new RegExp(pattern).test(string)
@@ -13,9 +19,11 @@ const isStringValid = ({ string, valuesEnum = [], pattern }) => {
   return true
 }
 
-const isValidNumber = value => !Number.isNaN(Number(value))
+function isValidNumber(value) {
+  return !Number.isNaN(Number(value))
+}
 
-const isIntegerValid = ({ integer, minimal, maximal }) => {
+function isIntegerValid({ integer, minimal, maximal }) {
     if (!isValidNumber(integer)) return false
 
     if (isValidNumber(minimal) && integer < minimal) return false
@@ -25,13 +33,7 @@ const isIntegerValid = ({ integer, minimal, maximal }) => {
     return true
 }
 
-const isArrayValid = ({ array, minItems, maxItems, itemsSchema }) => {
-  const validators = {
-    string: isStringValid,
-    integer: isIntegerValid,
-    array: isArrayValid
-  }
-
+function isArrayValid({ array, minItems, maxItems, itemsSchema }) {
   if (!Array.isArray(array)) return false
 
   if (isValidNumber(minItems) && array.length < minItems) return false
@@ -46,4 +48,4 @@ const isArrayValid = ({ array, minItems, maxItems, itemsSchema }) => {
   return true
 }
 
-module.exports = { isStringValid, isIntegerValid, isArrayValid }
+module.exports = validators
