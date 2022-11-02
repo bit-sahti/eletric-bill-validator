@@ -11,4 +11,4 @@ app.use('/', route)
 
 app.use(errorHandler)
 
-app.listen(3000, console.log(`App listening`))
+module.exports = { app }

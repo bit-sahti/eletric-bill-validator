@@ -5,7 +5,7 @@ const { cpf, cnpj } = generalConstants.validations
 const { consumptionClasses, billingModalities, connectionTypes } =  eligibilityConstants
 
 const eligibilitySchema = {
-  numeroDoDocumento: { oneOf: [cpf, cnpj] },
+  numeroDoDocumento: { required: true, oneOf: [cpf, cnpj] },
   tipoDeConexao: enumOf(connectionTypes),
   classeDeConsumo: enumOf(mergeNestedArrays(consumptionClasses)),
   modalidadeTarifaria: enumOf(mergeNestedArrays(billingModalities)),
