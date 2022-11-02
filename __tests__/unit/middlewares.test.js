@@ -2,6 +2,7 @@ const { describe, it, expect } = require('@jest/globals')
 const { validatorMiddleware } = require('../../src/middlewares')
 const { mockExpress } = require('./utils')
 const { validBody, invalidBody, mockedSchema, expectedErrors } = require('./mocks/validatorMiddlewareTests')
+const { errorConstants } = require('../../src/constants')
 
 describe('Middlewares test suite', () => {
   let request, response, next
@@ -37,7 +38,7 @@ describe('Middlewares test suite', () => {
     }
 
     expect(next).not.toHaveBeenCalled()
-    expect(() => validatorMiddleware(schema)(request, response, next)).toThrowError('Erro de validação')
+    expect(() => validatorMiddleware(schema)(request, response, next)).toThrowError(errorConstants.validationErrorMessage)
   })
 
   it("should throw if a property doesn't meet the provided schema", () => {
@@ -54,7 +55,7 @@ describe('Middlewares test suite', () => {
     }
 
     expect(next).not.toHaveBeenCalled()
-    expect(() => validatorMiddleware(schema)(request, response, next)).toThrowError('Erro de validação')
+    expect(() => validatorMiddleware(schema)(request, response, next)).toThrowError(errorConstants.validationErrorMessage)
   })
 
   it('should throw a validation error listing the failed validations', () => {
