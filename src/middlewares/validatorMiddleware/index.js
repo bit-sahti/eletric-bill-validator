@@ -1,55 +1,62 @@
-const { ValidationError } = require("../../errors")
-const validators = require("../../validators")
+const { ValidationError } = require('../../errors')
+const validators = require('../../validators')
 
-const buildError = ({ errors, propertyName, propertyValue, propertySchema }) => errors.push({
+const buildError = ({ errors, propertyName, propertyValue, propertySchema }) =>
+  errors.push({
     field: propertyName,
     value: propertyValue,
     requirements: propertySchema
-})
+  })
 
 const isParamValid = (propertyValue, schema) => {
-    const validator = validators[schema.type]
+  const validator = validators[schema.type]
 
-    if (validator) return validator({ [schema.type]: propertyValue, ...schema })
+  if (validator) return validator({ [schema.type]: propertyValue, ...schema })
 
-    return true
+  return true
 }
 
 const validatorMiddleware = schema => {
-    return (request, _, next) => {
-        const errors = []
-        const { body } = request
+  return (request, _, next) => {
+    const errors = []
+    const { body } = request
 
-        for (const propertyName in schema) {
-            const propertyValue = body[propertyName]
-            const propertySchema = schema[propertyName]
+    for (const propertyName in schema) {
+      const propertyValue = body[propertyName]
+      const propertySchema = schema[propertyName]
 
-            const hasMultipleSchemas = !!propertySchema.oneOf
+      const hasMultipleSchemas = !!propertySchema.oneOf
 
-            const errorParams = { errors, propertyName, propertyValue, propertySchema }
+      const errorParams = {
+        errors,
+        propertyName,
+        propertyValue,
+        propertySchema
+      }
 
-            if (propertySchema.required && !body[propertyName]) {
-                buildError(errorParams)
+      if (propertySchema.required && !body[propertyName]) {
+        buildError(errorParams)
 
-                continue
-            }
-            
-            if (hasMultipleSchemas) {
-                const areAllInvalid = propertySchema.oneOf.every(schema => isParamValid(propertyValue, schema))
+        continue
+      }
 
-                if (areAllInvalid) buildError(errorParams)
+      if (hasMultipleSchemas) {
+        const areAllInvalid = propertySchema.oneOf.every(schema =>
+          isParamValid(propertyValue, schema)
+        )
 
-                continue
-            }
-            
+        if (areAllInvalid) buildError(errorParams)
 
-            if (!isParamValid(propertyValue, propertySchema)) buildError(errorParams)
-        }
+        continue
+      }
 
-        if (errors.length) throw new ValidationError(errors)
-
-        next()
+      if (!isParamValid(propertyValue, propertySchema)) buildError(errorParams)
     }
+
+    if (errors.length) throw new ValidationError(errors)
+
+    next()
+  }
 }
 
 module.exports = validatorMiddleware

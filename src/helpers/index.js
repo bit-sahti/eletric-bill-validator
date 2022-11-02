@@ -1,21 +1,36 @@
 const calculateAverage = array => {
-    const totalSum = array.reduce((total, number) => total += number)
+  const totalSum = array.reduce((total, number) => (total += number))
 
-    return totalSum / array.length
+  return totalSum / array.length
 }
 
 const calculateAnualCO2Economy = averageConsumption => {
-    const anualConsumption = averageConsumption * 12
-    const carbonPer1000Kwh = 84
-    const anualConsumptionQuotient = anualConsumption / 1000
+  const anualConsumption = averageConsumption * 12
+  const carbonPer1000Kwh = 84
+  const anualConsumptionQuotient = anualConsumption / 1000
 
-    return anualConsumptionQuotient * carbonPer1000Kwh
+  return anualConsumptionQuotient * carbonPer1000Kwh
 }
 
-const getRandomValuefromArray = (array) => {
-    const randomIndex = Math.floor(Math.random() * array.length)
+const getRandomValuefromArray = array => {
+  const randomIndex = Math.floor(Math.random() * array.length)
 
-    return array[randomIndex]
+  return array[randomIndex]
 }
 
-module.exports = { calculateAverage, calculateAnualCO2Economy, getRandomValuefromArray }
+const mergeNestedArrays = category =>
+  Object.values(category).flatMap(array => array)
+
+const enumOf = values => ({
+  type: typeof values[0],
+  valuesEnum: values,
+  example: values[0]
+})
+
+module.exports = {
+  calculateAverage,
+  calculateAnualCO2Economy,
+  getRandomValuefromArray,
+  mergeNestedArrays,
+  enumOf
+}
