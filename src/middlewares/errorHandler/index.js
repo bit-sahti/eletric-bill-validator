@@ -1,11 +1,5 @@
 const { InternalServiceError } = require("../../errors")
 
-const buildApiError = error => {
-    if (error.status) return error
-
-    return new InternalServiceError(error)
-}
-
 const errorHandler = (error, request, response, next) => {
     console.error(error)
 

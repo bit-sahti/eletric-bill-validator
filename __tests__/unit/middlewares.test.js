@@ -66,7 +66,6 @@ describe('Middlewares test suite', () => {
 
       expect(next).not.toHaveBeenCalled()
     } catch (error) {
-      // console.error(error)
       expect(error.validations).toStrictEqual(expectedErrors)
     }
   })
