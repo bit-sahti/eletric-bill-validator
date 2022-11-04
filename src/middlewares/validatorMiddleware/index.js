@@ -1,12 +1,16 @@
 const { ValidationError } = require('../../errors')
 const validators = require('../../validators')
 
-const buildError = ({ errors, propertyName, propertyValue, propertySchema }) =>
+const buildError = ({ errors, propertyName, propertyValue, propertySchema }) => {
+  const { example, ...requirements } = propertySchema
+
   errors.push({
     field: propertyName,
     value: propertyValue,
-    requirements: propertySchema
+    requirements,
+    ...(example && { example })
   })
+}
 
 const isParamValid = (propertyValue, schema) => {
   const validator = validators[schema.type]
@@ -52,6 +56,8 @@ const validatorMiddleware = schema => {
 
       if (!isParamValid(propertyValue, propertySchema)) buildError(errorParams)
     }
+
+    console.log({ errors })
 
     if (errors.length) throw new ValidationError(errors)
 

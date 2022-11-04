@@ -15,8 +15,8 @@ const eligibilitySchema = {
     maxItems: 12,
     itemsSchema: {
       type: 'integer',
-      minimum: 0,
-      maximum: 9999
+      minimal: 0,
+      maximal: 9999
     }
   }
 }

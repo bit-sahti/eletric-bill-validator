@@ -1,5 +1,5 @@
 const validBody = {
-  aString: 'abs',
+  aString: 'd',
   anInteger: 10,
   anArray: [2, 3]
 }
