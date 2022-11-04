@@ -16,8 +16,24 @@ describe('Save Elibility History test suite', () => {
       calcVersion: '1'
     }
 
-    await saveHistory(body)
+    const mockedResult = {
+      id: 1
+    }
+
+    EligibilityCheckHistory.findOneAndUpdate.mockResolvedValue(mockedResult)
+
+    const result = await saveHistory(body)
+
+    expect(result).toStrictEqual(mockedResult)
 
     expect(EligibilityCheckHistory.findOneAndUpdate).toHaveBeenCalledWith(body, {}, { upsert: true })
+  })
+
+  it('should not propagate errors', async () => {
+    EligibilityCheckHistory.findOneAndUpdate.mockRejectedValue()
+
+    const result = await saveHistory({})
+
+    expect(result).toEqual(undefined)
   })
 })

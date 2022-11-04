@@ -28,7 +28,9 @@ const saveHistory = async ({
       upsert: true
     }
 
-    return EligibilityCheckHistory.findOneAndUpdate(documentBody, {}, options)
+   const result = await EligibilityCheckHistory.findOneAndUpdate(documentBody, {}, options)
+
+    return result
   } catch (error) {
     console.error(error)
   }
