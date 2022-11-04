@@ -1,0 +1,124 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Eletric Bill Validator",
+        "description": "Documentação da API de validação de conta de luz. Você pode conferir o código do projeto [aqui](https://github.com/bit-sahti/eletric-bill-validator)."
+    },
+    "host": "localhost:4000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/eligibility": {
+            "post": {
+                "tags": [
+                    "Elegibilidade"
+                ],
+                "description": "Recebe os dados de uma conta de luz e retorna se o cliente é ou não elegível.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Eligibility"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Checagem bem sucedida."
+                    },
+                    "400": {
+                        "description": "Erro de validação."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Eligibility": {
+                "type": "object",
+                "properties": {
+                    "numeroDoDocumento": {
+                        "type": "string",
+                        "required": true,
+                        "description": "CPF ou CNPJ",
+                        "example": "14041737706"
+                    },
+                    "tipoDeConexao": {
+                        "type": "string",
+                        "required": true,
+                        "enum": [
+                            "monofasico",
+                            "bifasico",
+                            "trifasico"
+                        ],
+                        "example": "bifasico"
+                    },
+                    "classeDeConsumo": {
+                        "type": "string",
+                        "required": true,
+                        "enum": [
+                            "comercial",
+                            "residencial",
+                            "industrial",
+                            "poderPublico",
+                            "rural"
+                        ],
+                        "example": "comercial"
+                    },
+                    "modalidadeTarifaria": {
+                        "type": "string",
+                        "required": true,
+                        "enum": [
+                            "convencional",
+                            "branca",
+                            "azul",
+                            "verde"
+                        ],
+                        "example": "convencional"
+                    },
+                    "historicoDeConsumo": {
+                        "type": "array",
+                        "required": true,
+                        "description": "Consumo em Kwh dos últimos meses, do mais recente ao mais antigo",
+                        "minItems": 3,
+                        "maxItems": 12,
+                        "items": {
+                            "type": "integer",
+                            "minimal": 0,
+                            "maximal": 9999
+                        },
+                        "example": [
+                            3878,
+                            9760,
+                            5976,
+                            2797,
+                            2481,
+                            5731,
+                            7538,
+                            4392,
+                            7859,
+                            4160,
+                            6941,
+                            4597
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -3,8 +3,10 @@ const { eligibilityController } = require('../controller')
 const { validatorMiddleware } = require('../middlewares')
 const { eligibilitySchema } = require('./schemas')
 
-const elegibitilyRouter = Router()
+const router = Router()
 
-elegibitilyRouter.post('/eligibility', validatorMiddleware(eligibilitySchema), eligibilityController)
+router.get('/', (_, res) => res.redirect('/docs'))
 
-module.exports = elegibitilyRouter
+router.post('/eligibility', validatorMiddleware(eligibilitySchema), eligibilityController)
+
+module.exports = router
