@@ -114,7 +114,9 @@ describe('Routes integration test suite', () => {
     })
 
     it('should update instead of duplicate data in the database', async () => {
-      await EligibilityCheckHistory.collection.drop()
+      const collection = await EligibilityCheckHistory.find()
+
+      if (collection.length) await EligibilityCheckHistory.collection.drop()
 
       for (let i = 0; i < 2; i++) {
         await request(app)
