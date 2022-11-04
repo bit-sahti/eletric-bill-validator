@@ -30,52 +30,6 @@ describe.only('Elegibility Controller test suite', () => {
     }
   })
 
-  // it('should get the average consumption and pass it to the service', () => {
-  //   const mockedAverageConsumption = 1000
-  //   calculateAverage.mockReturnValue(mockedAverageConsumption)
-  //   eligibilityService.mockReturnValue({})
-
-  //   eligibilityController(request, response)
-
-  //   const {
-  //     tipoDeConexao,
-  //     classeDeConsumo,
-  //     modalidadeTarifaria,
-  //     historicoDeConsumo
-  //   } = request.body
-
-  //   expect(calculateAverage).toHaveBeenCalledWith(historicoDeConsumo)
-
-  //   expect(eligibilityService).toHaveBeenCalledWith({
-  //     connectionType: tipoDeConexao,
-  //     consumptionClass: classeDeConsumo,
-  //     billingModality: modalidadeTarifaria,
-  //     averageConsumption: mockedAverageConsumption
-  //   })
-  // })
-
-  // it('should get and return the CO2 economy projection if client is eligible', () => {
-  //   const mockedAverageConsumption = 1000
-  //   const mockedCO2Economy = 84
-
-  //   calculateAverage.mockReturnValue(mockedAverageConsumption)
-  //   eligibilityService.mockReturnValue({
-  //     eligible: true,
-  //     ineligibilityReasons: []
-  //   })
-  //   calculateAnualCO2Economy.mockReturnValue(mockedCO2Economy)
-
-  //   eligibilityController(request, response)
-
-  //   expect(calculateAnualCO2Economy).toHaveBeenCalledWith(
-  //     mockedAverageConsumption
-  //   )
-  //   expect(response.json).toHaveBeenCalledWith({
-  //     elegivel: true,
-  //     economiaAnualDeCO2: mockedCO2Economy
-  //   })
-  // })
-
   it('should run the service and return the CO2 economy if client is elibible', async () => {
     const anualCO2Economy = 500
     const {
@@ -137,5 +91,15 @@ describe.only('Elegibility Controller test suite', () => {
       elegivel: false,
       razoesInelegibilidade: ineligibilityReasons
     })
+  })
+
+  it('should redirect errors to middleware', async () => {
+    const error = new Error('Fail')
+
+    eligibilityService.mockRejectedValue(error)
+
+    await eligibilityController(request, response, next)
+
+    expect(next).toHaveBeenCalledWith(error)
   })
 })

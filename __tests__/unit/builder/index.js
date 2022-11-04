@@ -7,10 +7,20 @@ class EletricBillBuilder {
   constructor() {
     this.#data = {}
 
+    this.#getDocumentNumber()
+    this.#getConsumptionHistory()
     this.#getConsumptionClass()
     this.#getBillingModalities()
     this.#getConnectionType()
     this.#getAverageConsumption()
+  }
+
+  #getDocumentNumber() {
+    this.#data.documentNumber = '12345678912'
+  }
+
+  #getConsumptionHistory() {
+    this.#data.consumptionHistory = [500, 600, 700]
   }
 
   #getConsumptionClass() {
@@ -21,8 +31,7 @@ class EletricBillBuilder {
   }
 
   #getBillingModalities() {
-    const { eligible: eligibleModalities } =
-      eligibilityConstants.billingModalities
+    const { eligible: eligibleModalities } = eligibilityConstants.billingModalities
 
     this.#data.billingModality = getRandomValuefromArray(eligibleModalities)
   }

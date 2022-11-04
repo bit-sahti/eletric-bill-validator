@@ -1,6 +1,7 @@
-const { eligibilityConstants } = require('../../src/constants')
-const { runEligibityCheck } = require('../../src/service/runEligibilityCheck')
-const { EletricBillBuilder } = require('./builder')
+const { describe, it, expect } = require('@jest/globals')
+const { eligibilityConstants } = require('../../../src/constants')
+const { runEligibityCheck } = require('../../../src/service/runEligibilityCheck')
+const { EletricBillBuilder } = require('../builder')
 
 describe('Run Eligibility Checker test suite', () => {
   it('should identify eligible bills', () => {
