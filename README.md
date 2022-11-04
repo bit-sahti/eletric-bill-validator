@@ -34,6 +34,12 @@ ou
 
 ## Considerações
 
-Elaborei o projeto em torno da funcionalidade primária (as regras de negócio) e depois busquei simular a estrutura básica que precisaria circundá-la - validação da requisição, tratamento de erros, documentação, e, caso houvesse tempo, persistência e logs.
+Elaborei o projeto em torno da funcionalidade primária, escrevendo os testes para as regra de negócio e implementando o serviço e sua rota, que formam o core da aplicação. Depois busquei simular a estrutura básica que o circundaria - validação da requisição, tratamento de erros, documentação, persistência (para consultas e relatórios futuros) e, caso houvesse tempo, logs.
 
 Procurei não adicionar complexidade desnecessária nem estrapolar as regras propostas, mas, ao mesmo tempo, precisei fazer algumas inferências com base no senso comum e nos exemplos fornecidos - para calcular a média de consumo e a economia anual de CO2, por exemplo, considerei que utilizaremos uma projeção a partir do consumo registrado, caso não tenhamos os dados dos últimos 12 meses.
+
+## Melhorias
+
+- Configurar docker, em especial para rodar os testes de integração
+- Adicionar sistema de logs
+- Configurar ambientes de teste, desenvolvimento e build
