@@ -1,18 +1,17 @@
-const { calculateAverage, calculateAnualCO2Economy } = require('../helpers')
 const { eligibilityService } = require('../service')
 
-const eligibilityController = (request, response) => {
+const eligibilityController = async (request, response) => {
   const {
+    numeroDoDocumento,
     tipoDeConexao,
     classeDeConsumo,
     modalidadeTarifaria,
     historicoDeConsumo
   } = request.body
 
-  const averageConsumption = calculateAverage(historicoDeConsumo)
-
-  const { eligible, ineligibilityReasons } = eligibilityService({
-    averageConsumption,
+  const { eligible, ineligibilityReasons, anualCO2Economy } = await eligibilityService({
+    documentNumber: numeroDoDocumento,
+    consumptionHistory: historicoDeConsumo,
     connectionType: tipoDeConexao,
     consumptionClass: classeDeConsumo,
     billingModality: modalidadeTarifaria
@@ -21,7 +20,7 @@ const eligibilityController = (request, response) => {
   const apiResponse = {
     elegivel: eligible,
     ...(!eligible && { razoesInelegibilidade: ineligibilityReasons }),
-    ...(eligible && { economiaAnualDeCO2: calculateAnualCO2Economy(averageConsumption) })
+    ...(eligible && { economiaAnualDeCO2: anualCO2Economy })
   }
 
   response.status(200).json(apiResponse)

@@ -38,7 +38,8 @@ const eligibilityConstants = {
     monofasico: 400,
     bifasico: 500,
     trifasico: 750
-  }
+  },
+  calcVersion: '1'
 }
 
 module.exports = { generalConstants, errorConstants, eligibilityConstants }

@@ -42,7 +42,15 @@ const EligibilityCheckHistorySchema = new mongoose.Schema({
             min: 0,
             max: 9999
         }]
+    },
+    calcVersion: {
+        type: Number,
+        required: true
     }
+}, {
+    timestamps: true
 })
 
-module.exports = new mongoose.model('EligibilityCheckHistory', EligibilityCheckHistorySchema)
+const EligibilityCheckHistory = new mongoose.model('EligibilityCheckHistory', EligibilityCheckHistorySchema, 'EligibilityCheckHistories')
+
+module.exports = { EligibilityCheckHistory }
