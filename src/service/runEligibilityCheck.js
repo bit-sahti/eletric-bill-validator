@@ -1,9 +1,10 @@
+const { eligibilityConstants } = require("../constants")
+
 const runEligibityCheck = ({
   connectionType,
   consumptionClass,
   billingModality,
-  averageConsumption,
-  eligibilityConstants
+  averageConsumption
 }) => {
   const {
     consumptionClasses,
@@ -11,6 +12,7 @@ const runEligibityCheck = ({
     consumptionThresholdsInKWh,
     errors
   } = eligibilityConstants
+  
   const isEligible = (category, value) => category.eligible.includes(value)
 
   const ineligibilityReasons = []

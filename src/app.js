@@ -6,11 +6,7 @@ const swaggerDocs = require('./swagger/swagger.json')
 const express = require('express')
 const routes = require('./routes')
 
-
 const { errorHandler } = require('./middlewares')
-const { connectToMongo } = require('./config')
-
-connectToMongo()
 
 const app = express()
 

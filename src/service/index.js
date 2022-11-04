@@ -16,8 +16,7 @@ const eligibilityService = async ({
     connectionType,
     consumptionClass,
     billingModality,
-    averageConsumption,
-    eligibilityConstants
+    averageConsumption
   })
 
   const anualCO2Economy = eligible
