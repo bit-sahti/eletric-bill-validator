@@ -1,3 +1,9 @@
-const { app } = require("./app");
+const { connectToMongo } = require('./config')
+const { app } = require('./app')
 
-app.listen((process.env.PORT || 300), console.log(`App listening on port ${process.env.PORT}`))
+connectToMongo()
+
+app.listen(
+  process.env.PORT || 300,
+  console.log(`App listening on port ${process.env.PORT}`)
+)

@@ -1,12 +1,12 @@
 const { eligibilityConstants } = require('../../src/constants')
-const { eligibilityService } = require('../../src/service')
+const { runEligibityCheck } = require('../../src/service/runEligibilityCheck')
 const { EletricBillBuilder } = require('./builder')
 
-describe('Eligibility Service test suite', () => {
+describe('Run Eligibility Checker test suite', () => {
   it('should identify eligible bills', () => {
     const bill = new EletricBillBuilder().build()
 
-    const result = eligibilityService(bill)
+    const result = runEligibityCheck(bill)
 
     expect(result).toStrictEqual({
       eligible: true,
@@ -17,7 +17,7 @@ describe('Eligibility Service test suite', () => {
   it('should identify ineligible consumption classes', () => {
     const bill = new EletricBillBuilder().withInvalidConsumptionClass().build()
 
-    const result = eligibilityService(bill)
+    const result = runEligibityCheck(bill)
 
     expect(result).toStrictEqual({
       eligible: false,
@@ -28,7 +28,7 @@ describe('Eligibility Service test suite', () => {
   it('should identify ineligible biling modalities', () => {
     const bill = new EletricBillBuilder().withInvalidBillingModality().build()
 
-    const result = eligibilityService(bill)
+    const result = runEligibityCheck(bill)
 
     expect(result).toStrictEqual({
       eligible: false,
@@ -42,7 +42,7 @@ describe('Eligibility Service test suite', () => {
       .withInvalidAverageConsumption()
       .build()
 
-    const result = eligibilityService(bill)
+    const result = runEligibityCheck(bill)
 
     expect(result).toStrictEqual({
       eligible: false,
@@ -58,7 +58,7 @@ describe('Eligibility Service test suite', () => {
       .withInvalidAverageConsumption()
       .build()
 
-    const result = eligibilityService(bill)
+    const result = runEligibityCheck(bill)
 
     expect(result).toStrictEqual({
       eligible: false,
@@ -74,7 +74,7 @@ describe('Eligibility Service test suite', () => {
       .withInvalidAverageConsumption()
       .build()
 
-    const result = eligibilityService(bill)
+    const result = runEligibityCheck(bill)
 
     expect(result).toStrictEqual({
       eligible: false,
