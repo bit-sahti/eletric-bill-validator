@@ -31,7 +31,8 @@ class EletricBillBuilder {
   }
 
   #getBillingModalities() {
-    const { eligible: eligibleModalities } = eligibilityConstants.billingModalities
+    const { eligible: eligibleModalities } =
+      eligibilityConstants.billingModalities
 
     this.#data.billingModality = getRandomValuefromArray(eligibleModalities)
   }

@@ -1,4 +1,4 @@
-const { errorConstants } = require("../constants")
+const { errorConstants } = require('../constants')
 
 class ValidationError extends Error {
   constructor(validations) {

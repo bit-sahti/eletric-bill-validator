@@ -1,11 +1,11 @@
-const { errorConstants } = require("../constants")
+const { errorConstants } = require('../constants')
 
 class InternalServiceError extends Error {
-    constructor() {
-        super(errorConstants.internalErrorMessage)
-        this.type = 'Erro interno'
-        this.status = 500
-    }
+  constructor() {
+    super(errorConstants.internalErrorMessage)
+    this.type = 'Erro interno'
+    this.status = 500
+  }
 }
 
 module.exports = InternalServiceError

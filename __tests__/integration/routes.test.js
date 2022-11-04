@@ -118,23 +118,25 @@ describe('Routes integration test suite', () => {
 
       for (let i = 0; i < 2; i++) {
         await request(app)
-        .post(route)
-        .send({
-          numeroDoDocumento: '14041737706',
-          tipoDeConexao: 'bifasico',
-          classeDeConsumo: 'comercial',
-          modalidadeTarifaria: 'convencional',
-          historicoDeConsumo: [
-            3878, 9760, 5976, 2797, 2481, 5731, 7538, 4392, 7859, 4160, 6941,
-            4597
-          ]
-        })
+          .post(route)
+          .send({
+            numeroDoDocumento: '14041737706',
+            tipoDeConexao: 'bifasico',
+            classeDeConsumo: 'comercial',
+            modalidadeTarifaria: 'convencional',
+            historicoDeConsumo: [
+              3878, 9760, 5976, 2797, 2481, 5731, 7538, 4392, 7859, 4160, 6941,
+              4597
+            ]
+          })
       }
 
       const createdDocuments = await EligibilityCheckHistory.find()
 
       expect(createdDocuments.length).toBe(1)
-      expect(createdDocuments[0].createdAt).not.toEqual(createdDocuments[0].updatedAt)
+      expect(createdDocuments[0].createdAt).not.toEqual(
+        createdDocuments[0].updatedAt
+      )
     })
   })
 })

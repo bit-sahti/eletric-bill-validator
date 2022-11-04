@@ -14,9 +14,11 @@ const generalConstants = {
   }
 }
 
-const errorConstants =  {
-  internalErrorMessage: 'Algo deu errado. Tente novamente mais tarde, ou entre em contato conosco se o erro persistir.',
-  validationErrorMessage: 'A validação da requisição falhou. Verifique os erros abaixo e tente novamente.'
+const errorConstants = {
+  internalErrorMessage:
+    'Algo deu errado. Tente novamente mais tarde, ou entre em contato conosco se o erro persistir.',
+  validationErrorMessage:
+    'A validação da requisição falhou. Verifique os erros abaixo e tente novamente.'
 }
 
 const eligibilityConstants = {

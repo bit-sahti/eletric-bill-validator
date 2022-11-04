@@ -3,11 +3,8 @@ const {
   calculateAverage,
   calculateAnualCO2Economy
 } = require('../../src/helpers')
-const { EligibilityCheckHistory } = require('../../src/model')
 const { eligibilityService } = require('../../src/service')
-const {
-  runEligibityCheck
-} = require('../../src/service/runEligibilityCheck')
+const { runEligibityCheck } = require('../../src/service/runEligibilityCheck')
 const { saveHistory } = require('../../src/service/saveHistory')
 const { EletricBillBuilder } = require('./builder')
 
@@ -71,7 +68,7 @@ describe('Eligibility Service test suite', () => {
 
   it('should save the check history', async () => {
     const bill = new EletricBillBuilder().build()
-    
+
     const mockedAverageConsumption = 1000
 
     calculateAverage.mockReturnValue(mockedAverageConsumption)

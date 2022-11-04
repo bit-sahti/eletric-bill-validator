@@ -1,10 +1,6 @@
 const { describe, expect, it } = require('@jest/globals')
 const { eligibilityConstants } = require('../../src/constants')
 const { eligibilityController } = require('../../src/controller')
-const {
-  calculateAverage,
-  calculateAnualCO2Economy
-} = require('../../src/helpers')
 const { eligibilityService } = require('../../src/service')
 const { mockExpress } = require('./utils')
 

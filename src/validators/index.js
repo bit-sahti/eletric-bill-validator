@@ -12,7 +12,8 @@ function isStringValid({ string, valuesEnum = [], pattern }) {
   if (pattern && !isPatternMet) return false
 
   const shouldMatchEnum = !!valuesEnum.length
-  const isStringInEnum = shouldMatchEnum && valuesEnum.some(value => string === value)
+  const isStringInEnum =
+    shouldMatchEnum && valuesEnum.some(value => string === value)
 
   if (shouldMatchEnum && !isStringInEnum) return false
 
@@ -24,13 +25,13 @@ function isValidNumber(value) {
 }
 
 function isIntegerValid({ integer, minimal, maximal }) {
-    if (!isValidNumber(integer)) return false
+  if (!isValidNumber(integer)) return false
 
-    if (isValidNumber(minimal) && integer < minimal) return false
-    
-    if (isValidNumber(maximal) && integer > maximal) return false
-    
-    return true
+  if (isValidNumber(minimal) && integer < minimal) return false
+
+  if (isValidNumber(maximal) && integer > maximal) return false
+
+  return true
 }
 
 function isArrayValid({ array, minItems, maxItems, itemsSchema }) {
@@ -40,8 +41,11 @@ function isArrayValid({ array, minItems, maxItems, itemsSchema }) {
 
   if (isValidNumber(maxItems) && array.length > maxItems) return false
 
-  const validateItem =  validators[itemsSchema?.type]
-  const isThereAnInvalidItem = array => array.some(value => !validateItem({ [itemsSchema.type]: value, ...itemsSchema }))
+  const validateItem = validators[itemsSchema?.type]
+  const isThereAnInvalidItem = array =>
+    array.some(
+      value => !validateItem({ [itemsSchema.type]: value, ...itemsSchema })
+    )
 
   if (itemsSchema && validateItem && isThereAnInvalidItem(array)) return false
 

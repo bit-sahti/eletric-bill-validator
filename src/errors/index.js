@@ -1,4 +1,4 @@
 module.exports = {
-    ValidationError: require('./validationError'),
-    InternalServiceError: require('./internalServiceError')
+  ValidationError: require('./validationError'),
+  InternalServiceError: require('./internalServiceError')
 }

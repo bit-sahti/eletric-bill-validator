@@ -26,7 +26,11 @@ describe('Save Elibility History test suite', () => {
 
     expect(result).toStrictEqual(mockedResult)
 
-    expect(EligibilityCheckHistory.findOneAndUpdate).toHaveBeenCalledWith(body, {}, { upsert: true })
+    expect(EligibilityCheckHistory.findOneAndUpdate).toHaveBeenCalledWith(
+      body,
+      {},
+      { upsert: true }
+    )
   })
 
   it('should not propagate errors', async () => {

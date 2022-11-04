@@ -10,7 +10,8 @@ const eligibilityController = async (request, response, next) => {
       historicoDeConsumo
     } = request.body
 
-    const { eligible, ineligibilityReasons, anualCO2Economy } = await eligibilityService({
+    const { eligible, ineligibilityReasons, anualCO2Economy } =
+      await eligibilityService({
         documentNumber: numeroDoDocumento,
         consumptionHistory: historicoDeConsumo,
         connectionType: tipoDeConexao,

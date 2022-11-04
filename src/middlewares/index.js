@@ -1,4 +1,4 @@
 module.exports = {
-    validatorMiddleware: require('./validatorMiddleware'),
-    errorHandler: require('./errorHandler')
+  validatorMiddleware: require('./validatorMiddleware'),
+  errorHandler: require('./errorHandler')
 }

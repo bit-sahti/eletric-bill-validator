@@ -4,7 +4,6 @@ Esse projeto checa os dados da conta de luz de um cliente para verificar a eligi
 
 Você testar o resultado [aqui](https://eletric-bill-validator.herokuapp.com) caso não deseje fazer uma instalação local - note, porém, que a API pode estar suspensa e demorar para responder à primeira requisição.
 
-
 ## Instalação
 
 Clone o projeto e instale as dependências com npm:
@@ -26,17 +25,12 @@ ou
   npm start
 ```
 
-
-
-
 ## Tecnologias utilizadas
+
 - Node
 - Express
 - Jest
 - Swagger
-
-
-
 
 ## Considerações
 
