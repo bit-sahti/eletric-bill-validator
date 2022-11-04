@@ -11,7 +11,7 @@ const config = {
   coverageDirectory: './coverage',
   reporters: ['default'],
   testEnvironment: 'node',
-  clearMocks: true
+  resetMocks: true
 }
 
 module.exports = config

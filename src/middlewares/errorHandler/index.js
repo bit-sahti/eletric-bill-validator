@@ -1,21 +1,17 @@
-const { InternalServiceError } = require("../../errors")
+const { InternalServiceError } = require('../../errors')
 
 const errorHandler = (error, request, response, next) => {
-    try {
-        console.error(error)
+  console.error(error)
 
-        if (!error.status) error = new InternalServiceError()
+  if (!error.status) error = new InternalServiceError()
 
-        const { type, message, status, validations } = error
+  const { type, message, status, validations } = error
 
-        return response.status(status).json({
-            type,
-            message,
-            ...(validations && { errors: validations })
-        })
-    } catch (error) {
-        response.send('oop')
-    }
+  return response.status(status).json({
+    type,
+    message,
+    ...(validations && { errors: validations })
+  })
 }
 
 module.exports = errorHandler
