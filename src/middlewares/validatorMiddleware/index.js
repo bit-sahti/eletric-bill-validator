@@ -41,8 +41,8 @@ const validatorMiddleware = schema => {
       }
 
       if (hasMultipleSchemas) {
-        const areAllInvalid = propertySchema.oneOf.every(schema =>
-          isParamValid(propertyValue, schema)
+        const areAllInvalid = propertySchema.oneOf.every(
+          schema => !isParamValid(propertyValue, schema)
         )
 
         if (areAllInvalid) buildError(errorParams)

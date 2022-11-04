@@ -70,6 +70,33 @@ describe('Middlewares test suite', () => {
       ).toThrowError(errorConstants.validationErrorMessage)
     })
 
+    it("should throw if a property has multiple schemas and the value doesn't meet any", () => {
+      const schema = {
+        prop: {
+          oneOf: [
+            {
+              type: 'string',
+              required: true,
+              pattern: '\\W'
+            },
+            {
+              type: 'integer',
+              minimal: 5
+            }
+          ]
+        }
+      }
+
+      request.body = {
+        prop: 4
+      }
+
+      expect(next).not.toHaveBeenCalled()
+      expect(() =>
+        validatorMiddleware(schema)(request, response, next)
+      ).toThrowError(errorConstants.validationErrorMessage)
+    })
+
     it('should throw a validation error listing the failed validations', () => {
       request.body = invalidBody
 
@@ -96,31 +123,30 @@ describe('Middlewares test suite', () => {
       })
     })
 
+    it('should not send the errors property if it is undefined', () => {
+      const error = new ValidationError()
 
-  it('should not send the errors property if it is undefined', () => {
-    const error = new ValidationError()
-    
-    errorHandler(error, request, response, next)
-    
-    expect(response.status).toHaveBeenCalledWith(400)
-    expect(response.json).toHaveBeenCalledWith({
-      type: error.type,
-      message: error.message,
-      errors: error.validations
+      errorHandler(error, request, response, next)
+
+      expect(response.status).toHaveBeenCalledWith(400)
+      expect(response.json).toHaveBeenCalledWith({
+        type: error.type,
+        message: error.message,
+        errors: error.validations
+      })
     })
-  })
 
-  it('should return an InternalServiceError if for unexpected errors', () => {
-    const error = new TypeError()
-    const expectedError = new InternalServiceError()
-    
-    errorHandler(error, request, response, next)
+    it('should return an InternalServiceError if for unexpected errors', () => {
+      const error = new TypeError()
+      const expectedError = new InternalServiceError()
 
-    expect(response.status).toHaveBeenCalledWith(500)
-    expect(response.json).toHaveBeenCalledWith({
-      type: expectedError.type,
-      message: expectedError.message
+      errorHandler(error, request, response, next)
+
+      expect(response.status).toHaveBeenCalledWith(500)
+      expect(response.json).toHaveBeenCalledWith({
+        type: expectedError.type,
+        message: expectedError.message
+      })
     })
-  })
   })
 })

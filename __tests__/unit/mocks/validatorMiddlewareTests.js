@@ -1,11 +1,11 @@
 const validBody = {
-    aString: 'abs',
-    anInteger: 10,
-    anArray: [2, 3]
-  }
+  aString: 'abs',
+  anInteger: 10,
+  anArray: [2, 3]
+}
 
 const invalidBody = {
-  aString: 'a1f2rf',
+  aString: 'abc',
   anInteger: 1,
   anArray: ['a23bc', 2, 3]
 }
@@ -16,12 +16,12 @@ const mockedSchema = {
     oneOf: [
       {
         type: 'string',
-        pattern: '\\D',
+        pattern: '[def]',
         example: '12132'
       },
       {
         type: 'string',
-        pattern: '[^a-zA-Z]',
+        pattern: '[ghi]',
         example: 'aasa'
       }
     ]
@@ -57,4 +57,4 @@ const expectedErrors = [
   }
 ]
 
-module.exports = { validBody, invalidBody, mockedSchema, expectedErrors}
+module.exports = { validBody, invalidBody, mockedSchema, expectedErrors }
