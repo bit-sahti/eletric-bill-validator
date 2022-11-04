@@ -31,6 +31,7 @@ ou
 - Express
 - Jest
 - Swagger
+- Mongoose
 
 ## Considerações
 
