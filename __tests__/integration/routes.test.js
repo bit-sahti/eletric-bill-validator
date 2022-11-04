@@ -3,8 +3,20 @@ const request = require('supertest')
 const { describe, it, expect } = require('@jest/globals')
 const { errorConstants } = require('../../src/constants')
 
-describe('Eligibility Route test suite', () => {
-  const route = '/eligibility'
+describe('Routes integration test suite', () => {
+  describe('Get root route', () => {
+    it('should redirect to API docs', async () => {
+      const { status, headers } = await request(app)
+      .get('/')
+
+      expect(status).toBe(302)
+      expect(headers.location).toBe('/docs')
+    })
+
+  })
+
+  describe('Eligibility post route', () => {
+    const route = '/eligibility'
 
   it('should return a validation error if the request schema is not followed', async () => {
     const { status, body } = await request(app)
@@ -63,5 +75,6 @@ describe('Eligibility Route test suite', () => {
         'Modalidade tarifária não aceita'
       ]
     })
+  })
   })
 })

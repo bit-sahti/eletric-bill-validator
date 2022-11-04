@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "npx nodemon src/server.js",
     "start": "node src/server.js",
-    "test": "jest --config jest.config.js --watch",
-    "test:cov": "jest --config jest.config.js --coverage"
+    "test": "jest --config jest.config.js --watch --silent",
+    "test:cov": "jest --config jest.config.js --coverage --silent --noStackTrace"
   },
   "keywords": [],
   "author": "",

@@ -4,7 +4,7 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerDocs = require('./swagger/swagger.json')
 
 const express = require('express')
-const route = require('./routes')
+const routes = require('./routes')
 
 const { errorHandler } = require('./middlewares')
 
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-app.use('/', route)
+app.use('/', routes)
 
 app.use(errorHandler)
 

@@ -5,7 +5,7 @@ const { eligibilitySchema } = require('./schemas')
 
 const router = Router()
 
-router.get('/', (_, res) => res.redirect('/docs'))
+router.get('/', (_, response) => response.redirect('/docs'))
 
 router.post('/eligibility', validatorMiddleware(eligibilitySchema), eligibilityController)
 
