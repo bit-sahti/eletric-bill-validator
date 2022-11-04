@@ -1,9 +1,9 @@
 const { describe, it, expect } = require('@jest/globals')
-const { EligibilityCheckHistory } = require('../../../src/model')
-const { saveHistory } = require('../../../src/service/saveHistory')
-const { EletricBillBuilder } = require('../builder')
+const { EligibilityCheckHistory } = require('../../src/model')
+const { saveHistory } = require('../../src/service/saveHistory')
+const { EletricBillBuilder } = require('./builder')
 
-jest.mock('../../../src/model')
+jest.mock('../../src/model')
 
 describe('Save Elibility History test suite', () => {
   it('should upsert the data to the database and return the result', async () => {

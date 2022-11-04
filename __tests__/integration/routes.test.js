@@ -4,7 +4,7 @@ const { app } = require('../../src/app')
 const { errorConstants } = require('../../src/constants')
 const mongoose = require('mongoose')
 
-describe.only('Routes integration test suite', () => {
+describe('Routes integration test suite', () => {
   describe('Get root route', () => {
     it('should redirect to API docs', async () => {
       const { status, headers } = await request(app).get('/')

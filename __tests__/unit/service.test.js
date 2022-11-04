@@ -2,22 +2,22 @@ const { describe, it, expect } = require('@jest/globals')
 const {
   calculateAverage,
   calculateAnualCO2Economy
-} = require('../../../src/helpers')
-const { EligibilityCheckHistory } = require('../../../src/model')
-const { eligibilityService } = require('../../../src/service')
+} = require('../../src/helpers')
+const { EligibilityCheckHistory } = require('../../src/model')
+const { eligibilityService } = require('../../src/service')
 const {
   runEligibityCheck
-} = require('../../../src/service/runEligibilityCheck')
-const { saveHistory } = require('../../../src/service/saveHistory')
-const { EletricBillBuilder } = require('../builder')
+} = require('../../src/service/runEligibilityCheck')
+const { saveHistory } = require('../../src/service/saveHistory')
+const { EletricBillBuilder } = require('./builder')
 
-jest.mock('../../../src/model')
-jest.mock('../../../src/helpers/calculateAverage.js')
-jest.mock('../../../src/helpers/calculateAnualCO2Economy.js')
-jest.mock('../../../src/service/runEligibilityCheck')
-jest.mock('../../../src/service/saveHistory.js')
+jest.mock('../../src/model')
+jest.mock('../../src/helpers/calculateAverage.js')
+jest.mock('../../src/helpers/calculateAnualCO2Economy.js')
+jest.mock('../../src/service/runEligibilityCheck')
+jest.mock('../../src/service/saveHistory.js')
 
-describe.only('Eligibility Service test suite', () => {
+describe('Eligibility Service test suite', () => {
   it('should calculate the average consumption and run elibility check', async () => {
     const bill = new EletricBillBuilder().build()
 

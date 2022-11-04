@@ -11,7 +11,7 @@ const { mockExpress } = require('./utils')
 jest.mock('../../src/service/index.js')
 jest.mock('../../src/helpers')
 
-describe.only('Elegibility Controller test suite', () => {
+describe('Elegibility Controller test suite', () => {
   let request, response, next
 
   beforeEach(() => {

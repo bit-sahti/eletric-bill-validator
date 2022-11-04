@@ -1,7 +1,7 @@
 const { generalConstants } = require('../../src/constants')
 const { calculateAverage, calculateAnualCO2Economy, mergeNestedArrays, enumOf } = require('../../src/helpers')
 
-describe.only('Helpers test suite', () => {
+describe('Helpers test suite', () => {
     it('#calculateAverage -> should calculate the average from a list of numbers', () => {
         expect(calculateAverage([100, 100, 0, -100, 400])).toEqual(100)
     })
