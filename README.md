@@ -13,7 +13,7 @@ Clone o projeto e instale as dependências com npm:
   npm install
 ```
 
-Depois disso, rode o projeto com:
+Sete as seguintes variáveis de ambiente presentes no arquivo `.env.example` e rode o projeto com:
 
 ```bash
   npm run dev
