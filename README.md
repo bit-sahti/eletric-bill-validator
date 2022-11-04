@@ -35,7 +35,9 @@ ou
 
 ## Considerações
 
-Elaborei o projeto em torno da funcionalidade primária, escrevendo os testes para as regra de negócio e implementando o serviço e sua rota, que formam o core da aplicação. Depois busquei simular a estrutura básica que o circundaria - validação da requisição, tratamento de erros, documentação, persistência (para consultas e relatórios futuros) e, caso houvesse tempo, logs.
+Elaborei o projeto em torno da funcionalidade primária, escrevendo os testes para as regra de negócio e implementando o serviço e sua rota. Depois disso busquei simular a estrutura básica que circundaria a funcionalidade em produção (validação da requisição, tratamento de erros, documentação e persistência para consultas e eventuais relatórios futuros). 
+
+Acabei me empolgando e escrevendo código demais, mas o core da aplicação se pode ser encontrado seguindo o caminho da rota `/eligibility`.
 
 Procurei não adicionar complexidade desnecessária nem estrapolar as regras propostas, mas, ao mesmo tempo, precisei fazer algumas inferências com base no senso comum e nos exemplos fornecidos - para calcular a média de consumo e a economia anual de CO2, por exemplo, considerei que utilizaremos uma projeção a partir do consumo registrado, caso não tenhamos os dados dos últimos 12 meses.
 
