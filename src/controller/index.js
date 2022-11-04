@@ -1,6 +1,8 @@
 const { eligibilityService } = require('../service')
 
 const eligibilityController = async (request, response, next) => {
+  console.log('Starting eligibility route. Received body: ', JSON.stringify(request.body))
+
   try {
     const {
       numeroDoDocumento,
@@ -25,6 +27,8 @@ const eligibilityController = async (request, response, next) => {
       ...(eligible && { economiaAnualDeCO2: anualCO2Economy })
     }
 
+    console.log('Sending response: ', JSON.stringify(apiResponse))
+    
     response.status(200).json(apiResponse)
   } catch (error) {
     next(error)

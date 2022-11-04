@@ -57,8 +57,6 @@ const validatorMiddleware = schema => {
       if (!isParamValid(propertyValue, propertySchema)) buildError(errorParams)
     }
 
-    console.log({ errors })
-
     if (errors.length) throw new ValidationError(errors)
 
     next()
