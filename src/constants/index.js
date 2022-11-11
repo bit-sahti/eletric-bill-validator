@@ -31,6 +31,33 @@ const eligibilityConstants = {
     eligible: ['comercial', 'residencial', 'industrial'],
     ineligible: ['poderPublico', 'rural']
   },
+  consumptionSubclasses: {
+    comercial: {
+      eligible: [
+        'administracaoCondominial',
+        'comercial',
+        'servicosDeTelecomunicacao',
+        'servicosDeTransporte'
+      ],
+      ineligible: ['templosReligiosos']
+    },
+    industrial: {
+      eligible: ['industrial'],
+      ineligible: []
+    },
+    residencial: {
+      eligible: ['residencial'],
+      ineligible: ['baixaRenda']
+    },
+    poderPublico: {
+      eligible: [],
+      ineligible: ['poderPublicoEstadual', 'poderPublicoMunicipal']
+    },
+    rural: {
+      eligible: [],
+      ineligible: ['agropecuariaRural']
+    }
+  },
   billingModalities: {
     eligible: ['convencional', 'branca'],
     ineligible: ['azul', 'verde']

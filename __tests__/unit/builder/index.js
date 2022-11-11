@@ -13,6 +13,7 @@ class EletricBillBuilder {
     this.#getBillingModalities()
     this.#getConnectionType()
     this.#getAverageConsumption()
+    this.#getConsumptionSubclass()
   }
 
   #getDocumentNumber() {
@@ -52,6 +53,13 @@ class EletricBillBuilder {
     this.#data.averageConsumption = this.#getConsumptionThreshould() + 1
   }
 
+  #getConsumptionSubclass() {
+    const consumptionClass = this.#data.consumptionClass
+    const eligibleSubclasses = eligibilityConstants.consumptionSubclasses[consumptionClass].eligible
+
+    this.#data.consumptionSubclass = getRandomValuefromArray(eligibleSubclasses)
+  }
+
   withInvalidConsumptionClass() {
     const { ineligible: ineligibleClasses } =
       eligibilityConstants.consumptionClasses
@@ -80,6 +88,13 @@ class EletricBillBuilder {
     this.#data.connectionType = connectionType
 
     return this
+  }
+
+  withInvalidConsumptionSubclass() {
+    const consumptionClass = this.#data.consumptionClass
+    const ineligibleSubclasses = eligibilityConstants.consumptionSubclasses[consumptionClass].ineligible
+
+    this.#data.consumptionSubclass = getRandomValuefromArray(ineligibleSubclasses)
   }
 
   build() {
