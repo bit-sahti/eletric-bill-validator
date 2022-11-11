@@ -98,17 +98,21 @@ class EletricBillBuilder {
 
     this.#data.consumptionSubclass =
       getRandomValuefromArray(ineligibleSubclasses)
+
+      return this
   }
 
   withMismatchingConsumptionSubclass() {
     const consumptionClass = this.#data.consumptionClass
-    const otherConsumptionClasses = Object.keys(eligibilityConstants.consumptionClasses).filter(otherConsumptionClass => otherConsumptionClass !== consumptionClass)
+    const otherConsumptionClasses = Object.keys(eligibilityConstants.consumptionSubclasses).filter(otherConsumptionClass => otherConsumptionClass !== consumptionClass)
 
     const randomConsumptionClass = getRandomValuefromArray(otherConsumptionClasses)
 
     const randomConsumptionClassSubclasses = mergeNestedArrays(eligibilityConstants.consumptionSubclasses[randomConsumptionClass])
 
     this.#data.consumptionSubclass =  getRandomValuefromArray(randomConsumptionClassSubclasses)
+
+    return this
   }
 
   build() {
