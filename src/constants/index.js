@@ -25,7 +25,9 @@ const eligibilityConstants = {
   errors: {
     invalidConsumpionClass: 'Classe de consumo não aceita',
     invalidBillingModality: 'Modalidade tarifária não aceita',
-    minimalConsumptionNotMet: 'Consumo muito baixo para tipo de conexão'
+    minimalConsumptionNotMet: 'Consumo muito baixo para tipo de conexão',
+    invalidConsumptionSubclass: 'Subclasse de consumo não e aceita',
+    subclassDoesntBelognToConsumptionClass: 'Subclasse de consumo não pertence a classe de consumo'
   },
   consumptionClasses: {
     eligible: ['comercial', 'residencial', 'industrial'],

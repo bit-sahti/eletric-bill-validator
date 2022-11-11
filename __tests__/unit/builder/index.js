@@ -1,5 +1,5 @@
 const { eligibilityConstants } = require('../../../src/constants')
-const { getRandomValuefromArray } = require('../../../src/helpers')
+const { getRandomValuefromArray, mergeNestedArrays } = require('../../../src/helpers')
 
 class EletricBillBuilder {
   #data
@@ -55,7 +55,8 @@ class EletricBillBuilder {
 
   #getConsumptionSubclass() {
     const consumptionClass = this.#data.consumptionClass
-    const eligibleSubclasses = eligibilityConstants.consumptionSubclasses[consumptionClass].eligible
+    const eligibleSubclasses =
+      eligibilityConstants.consumptionSubclasses[consumptionClass].eligible
 
     this.#data.consumptionSubclass = getRandomValuefromArray(eligibleSubclasses)
   }
@@ -92,9 +93,22 @@ class EletricBillBuilder {
 
   withInvalidConsumptionSubclass() {
     const consumptionClass = this.#data.consumptionClass
-    const ineligibleSubclasses = eligibilityConstants.consumptionSubclasses[consumptionClass].ineligible
+    const ineligibleSubclasses =
+      eligibilityConstants.consumptionSubclasses[consumptionClass].ineligible
 
-    this.#data.consumptionSubclass = getRandomValuefromArray(ineligibleSubclasses)
+    this.#data.consumptionSubclass =
+      getRandomValuefromArray(ineligibleSubclasses)
+  }
+
+  withMismatchingConsumptionSubclass() {
+    const consumptionClass = this.#data.consumptionClass
+    const otherConsumptionClasses = Object.keys(eligibilityConstants.consumptionClasses).filter(otherConsumptionClass => otherConsumptionClass !== consumptionClass)
+
+    const randomConsumptionClass = getRandomValuefromArray(otherConsumptionClasses)
+
+    const randomConsumptionClassSubclasses = mergeNestedArrays(eligibilityConstants.consumptionSubclasses[randomConsumptionClass])
+
+    this.#data.consumptionSubclass =  getRandomValuefromArray(randomConsumptionClassSubclasses)
   }
 
   build() {
