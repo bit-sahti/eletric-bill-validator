@@ -10,10 +10,8 @@ const eligibilityService = async ({
   consumptionClass,
   billingModality
 }) => {
-  console.log('Calculating average consumption')
   const averageConsumption = calculateAverage(consumptionHistory)
 
-  console.log('Running eligibility check')
   const { eligible, ineligibilityReasons } = runEligibityCheck({
     connectionType,
     consumptionClass,
@@ -25,7 +23,6 @@ const eligibilityService = async ({
     ? calculateAnualCO2Economy(averageConsumption)
     : null
 
-  console.log('Saving history')
   await saveHistory({
     documentNumber,
     eligible,

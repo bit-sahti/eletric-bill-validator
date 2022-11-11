@@ -26,14 +26,37 @@ describe('Run Eligibility Checker test suite', () => {
     })
   })
 
-  it('should identify ineligible biling modalities', () => {
+  it('should identify ineligible consumption subclasses from within a category', () => {
+    const bill = new EletricBillBuilder().withInvalidConsumptionSubclass().build()
+
+    const result = runEligibityCheck(bill)
+
+    expect(result).toStrictEqual({
+      eligible: false,
+      ineligibilityReasons: [eligibilityConstants.errors.invalidConsumptionSubclass]
+    })
+  })
+
+  it("should identify consumption subclasses that don't belong to a category", () => {
+    const bill = new EletricBillBuilder().withMismatchingConsumptionSubclass().build()
+
+    const result = runEligibityCheck(bill)
+
+    expect(result).toStrictEqual({
+      eligible: false,
+      ineligibilityReasons: expect.arrayContaining([eligibilityConstants.errors.mismatchingConsumptionClass])
+    })
+  })
+
+
+  it('should identify ineligible billing modalities', () => {
     const bill = new EletricBillBuilder().withInvalidBillingModality().build()
 
     const result = runEligibityCheck(bill)
 
     expect(result).toStrictEqual({
       eligible: false,
-      ineligibilityReasons: [eligibilityConstants.errors.invalidBillingModality]
+      ineligibilityReasons: expect.arrayContaining([eligibilityConstants.errors.invalidBillingModality])
     })
   })
 
